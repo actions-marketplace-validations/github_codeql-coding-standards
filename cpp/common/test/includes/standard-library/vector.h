@@ -2,6 +2,8 @@
 #define _GHLIBCPP_VECTOR
 #include <iterator>
 #include <string>
+#include "memory.h"
+#include "empty.h"
 
 namespace std {
 
@@ -18,8 +20,8 @@ public:
 
   iterator begin();
   iterator end();
-  const_iterator cbegin();
-  const_iterator cend();
+  const_iterator cbegin() const;
+  const_iterator cend() const;
   size_type size() const noexcept;
   void resize(size_type sz);
   void resize(size_type sz, const T &c);
@@ -33,6 +35,9 @@ public:
   constexpr vector(const vector &, const Allocator &);
   constexpr vector(vector &&, const Allocator &);
   vector(initializer_list<T>, const Allocator & = Allocator());
+
+  ~vector();
+  
   constexpr vector &operator=(const vector &x);
   constexpr vector &operator=(vector &&x);
   constexpr void clear() noexcept;
@@ -52,6 +57,11 @@ public:
                   InputIterator last);
   iterator insert(const_iterator position, initializer_list<T> il);
 
+  iterator erase(iterator position);
+  iterator erase(const_iterator position);
+  iterator erase(iterator first, iterator last);
+  iterator erase(const_iterator first, const_iterator last);
+
   reference operator[](size_type n);
   const_reference operator[](size_type n) const;
 
@@ -60,8 +70,6 @@ public:
   const_reference front() const;
   reference back();
   const_reference back() const;
-
-  ~vector();
 };
 } // namespace std
 

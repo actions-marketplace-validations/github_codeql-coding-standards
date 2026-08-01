@@ -7,6 +7,7 @@ void *calloc(size_t num, size_t size);
 void free(void *ptr);
 void *malloc(size_t size);
 void *realloc(void *ptr, size_t size);
+void *aligned_alloc(size_t, size_t);
 
 [[noreturn]] void _Exit(int status) noexcept;
 [[noreturn]] void abort(void) noexcept;
@@ -35,5 +36,11 @@ float strtof(const char *str, char **endptr);
 long double strtold(const char *str, char **endptr);
 
 int rand(void);
+
+int mblen (const char *, size_t);
+int mbtowc (wchar_t *__restrict, const char *__restrict, size_t);
+int wctomb (char *, wchar_t);
+size_t mbstowcs (wchar_t *__restrict, const char *__restrict, size_t);
+size_t wcstombs (char *__restrict, const wchar_t *__restrict, size_t);
 
 #endif // _GHLIBCPP_STDLIB

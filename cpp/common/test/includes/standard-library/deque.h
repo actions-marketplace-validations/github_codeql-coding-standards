@@ -1,5 +1,8 @@
 #ifndef _GHLIBCPP_DEQUE
 #define _GHLIBCPP_DEQUE
+#include "memory.h"
+#include <empty.h>
+#include <initializer_list>
 #include <iterator>
 #include <string>
 
@@ -10,6 +13,12 @@ public:
   typedef T value_type;
   typedef value_type &reference;
   typedef const value_type &const_reference;
+
+  deque();
+  deque(const deque &);
+  deque(deque &&);
+  deque(std::initializer_list<T>, const Allocator & = Allocator());
+  ~deque();
 
   typedef __iterator<T> iterator;
   typedef __iterator<T> const_iterator;

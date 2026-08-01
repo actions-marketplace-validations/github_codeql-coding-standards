@@ -62,6 +62,20 @@ template <typename T, unsigned int N> struct remove_extent<T[N]> {
   typedef T type;
 };
 
+template <typename T> struct is_abstract {
+  const static bool value = false;
+  constexpr operator bool() { return value; }
+};
+
+template <typename T> bool is_abstract_v = is_abstract<T>::value;
+
+template <typename T, typename U> struct is_same {
+  const static bool value = false;
+  constexpr operator bool() { return value; }
+};
+
+template <typename T, typename U> bool is_same_v = is_same<T, U>::value;
+
 template <class T> struct is_trivially_copy_constructible {
   const static bool value = true;
   constexpr operator bool() { return value; }
@@ -81,6 +95,21 @@ template <class T> struct is_trivially_move_assignable {
   const static bool value = true;
   constexpr operator bool() { return value; }
 };
+
+template <class T> struct is_literal_type {
+  const static bool value = true;
+  constexpr operator bool() { return value; }
+};
+
+template <class T> struct is_trivially_copyable {
+  const static bool value = true;
+  constexpr operator bool() { return value; }
+};
+
+template <class T> inline constexpr bool is_literal_type_v = is_literal_type<T>::value;
+
+template <class T>
+inline constexpr bool is_trivially_copyable_v = is_trivially_copyable<T>::value;
 
 } // namespace std
 #endif // _GHLIBCPP_TYPE_TRAITS
